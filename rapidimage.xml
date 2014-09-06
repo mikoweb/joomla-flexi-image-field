@@ -10,12 +10,12 @@
     <version>0.0.1</version>
     <description>FLEXI_FIELD_RAPIDIMAGE</description>
     <scriptfile>install.php</scriptfile>
-	<files>
-		<filename plugin="rapidimage">rapidimage.php</filename>
+    <files>
+        <filename plugin="rapidimage">rapidimage.php</filename>
         <filename>.htaccess</filename>
-		<filename>index.html</filename>
+        <filename>index.html</filename>
         <filename>LICENSE</filename>
-	</files>
+    </files>
     <languages folder="language">
         <language tag="en-GB">en-GB/en-GB.plg_flexicontent_fields_rapidimage.ini</language>
         <language tag="en-GB">en-GB/en-GB.plg_flexicontent_fields_rapidimage.sys.ini</language>
@@ -59,6 +59,42 @@
 
                 <field name="upload_extensions" type="text" default="bmp,gif,jpg,jpeg,png,BMP,GIF,JPG,JPEG,PNG" size="60" label="FLEXI_LEGAL_EXTENSIONS_LABEL" description="FLEXI_LEGAL_EXTENSIONS_DESC" />
                 <field name="upload_maxsize" type="text" default="10000000" label="FLEXI_MAXIMUM_SIZE_LABEL" description="FLEXI_MAXIMUM_SIZE_DESC" />
+
+                <field name="" type="separator" default="FLEXI_DISPLAY_OPTIONS" level="level2" />
+
+                <field name="" type="separator" default="FLEXI_IMGFIELD_THUMBNAILS" level="level3" />
+                <field name="thumbinitemview" type="list" default="2" label="FLEXI_FIELD_THUMB_IN_ITEM" description="FLEXI_FIELD_THUMB_IN_ITEM_DESC">
+                    <option value="1">FLEXI_SMALL</option>
+                    <option value="2">FLEXI_MEDIUM</option>
+                    <option value="3">FLEXI_LARGE</option>
+                    <option value="4">FLEXI_ORIGINAL</option>
+                </field>
+                <field name="thumbincatview" type="list" default="1" label="FLEXI_FIELD_THUMB_IN_CAT" description="FLEXI_FIELD_THUMB_IN_CAT_DESC">
+                    <option value="1">FLEXI_SMALL</option>
+                    <option value="2">FLEXI_MEDIUM</option>
+                    <option value="3">FLEXI_LARGE</option>
+                    <option value="4">FLEXI_ORIGINAL</option>
+                </field>
+
+                <field name="" type="separator" default="FLEXI_IMGFIELD_INFORMATION" level="level3" />
+                <field name="showtitle" type="radio" default="0" label="FLEXI_FIELD_SHOW_TITLE" description="FLEXI_FIELD_SHOW_TITLE_DESC" class="btn-group btn-group-yesno">
+                    <option value="0">FLEXI_NO</option>
+                    <option value="1">FLEXI_YES</option>
+                </field>
+                <field name="showdesc" type="radio" default="0" label="FLEXI_FIELD_SHOW_LONGDESC" description="FLEXI_FIELD_SHOW_LONGDESC_DESC" class="btn-group btn-group-yesno">
+                    <option value="0">FLEXI_NO</option>
+                    <option value="1">FLEXI_YES</option>
+                </field>
+
+                <field name="" type="separator" default="FLEXI_IMGFIELD_HOVERING_LEGEND" level="level3" />
+                <field name="uselegend" type="radio" default="1" label="FLEXI_FIELD_IMAGE_USE_LEGEND" description="FLEXI_FIELD_IMAGE_USE_LEGEND_DESC" class="btn-group btn-group-yesno">
+                    <option value="0">FLEXI_NO</option>
+                    <option value="1">FLEXI_YES</option>
+                </field>
+                <field name="legendinview" type="fccheckbox" default=""
+                       checkoptions="FLEXI_ITEMS,FLEXI_CATEGORY,FLEXI_MODULE,FLEXI_BACKEND" checkvals="item,category,module,backend" defaultvals="item,category,module,backend"
+                       label="FLEXI_FIELD_ENABLE_IN_VIEWS" description="FLEXI_FIELD_ENABLE_IN_VIEWS_DESC" />
+
 
                 <field name="" type="separator" default="FLEXI_IMGFIELD_THUMBNAIL_CREATION" description="FLEXI_IMGFIELD_THUMBNAIL_CREATION_DESC" level="level1" />
 
