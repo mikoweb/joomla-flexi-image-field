@@ -19,6 +19,7 @@ jimport ('joomla.plugin.helper');
  * @author  Rafał Mikołajun <rafal@vision-web.pl>
  * @package Joomla FlexiContent Image Field
  */
-class plgFlexicontent_fieldsRapidimage extends JPlugin
+class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
 {
+
 }
