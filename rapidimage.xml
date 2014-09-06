@@ -63,7 +63,7 @@
                 <field name="" type="separator" default="FLEXI_IMGFIELD_THUMBNAIL_CREATION" description="FLEXI_IMGFIELD_THUMBNAIL_CREATION_DESC" level="level1" />
 
                 <field name="default_image" type="media" default="" size="60" label="FLEXI_FIELD_DEFAULT_IMAGE" description="FLEXI_FIELD_DEFAULT_IMAGE_DESC" />
-                <field name="dir" type="text" default="images/stories/flexicontent" size="60" label="FLEXI_FIELD_IMAGE_FOLDER" description="FLEXI_FIELD_IMAGE_FOLDER_DESC" />
+                <field name="dir" type="text" default="uploads/items-media" size="60" label="FLEXI_FIELD_IMAGE_FOLDER" description="FLEXI_FIELD_IMAGE_FOLDER_DESC" />
                 <field name="quality" type="text" default="100" size="4" label="FLEXI_FIELD_IMAGE_QUALITY" description="FLEXI_FIELD_IMAGE_QUALITY_DESC" />
                 <field name="wm_opacity" type="text" default="100" size="4" label="FLEXI_FIELD_IMAGE_WM_TRANS" description="FLEXI_FIELD_IMAGE_WM_TRANS_DESC" />
                 <field name="wm_position" type="list" default="BR" label="FLEXI_FIELD_IMAGE_WM_POS" description="FLEXI_FIELD_IMAGE_WM_POS_DESC">
