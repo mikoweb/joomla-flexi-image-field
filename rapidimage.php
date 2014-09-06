@@ -23,5 +23,5 @@ require_once JPATH_PLUGINS . "/flexicontent_fields/image/image.php";
  */
 class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
 {
-
+    static $field_types = array('rapidimage');
 }
