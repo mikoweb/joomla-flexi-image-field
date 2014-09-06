@@ -35,7 +35,7 @@
                 <field name="" type="separator" default="FLEXI_BASIC_PARAMS_LABEL" level="level1" />
 
                 <field name="" type="separator" default="FLEXI_BASIC_PARAMS_IMAGE_HANDLING_LABEL" description="" level="level2" />
-                <field name="image_source" type="list" default="0" label="FLEXI_FIELD_IMAGE_SOURCE_MODE" description="FLEXI_FIELD_IMAGE_SOURCE_MODE_DESC" >
+                <field name="image_source" type="list" default="1" label="FLEXI_FIELD_IMAGE_SOURCE_MODE" description="FLEXI_FIELD_IMAGE_SOURCE_MODE_DESC" >
                     <option value="0">FLEXI_FIELD_REUSABLE_DB_MODE</option>
                     <option value="1">FLEXI_FIELD_ITEM_SPECIFIC_FOLDER_MODE</option>
                 </field>
@@ -164,15 +164,15 @@
 
                 <field name="" type="separator" default="FLEXI_FIELD_EXISTING_IMAGE_LIST" description="FLEXI_FIELD_EXISTING_IMAGE_LIST_DESC" level="level3" menu="hide" />
                 <field name="imagepickerlimit" type="text" default="200" label="FLEXI_FIELD_IMAGE_GRAPHICAL_PICKER_LIMITATION" description="FLEXI_FIELD_IMAGE_GRAPHICAL_PICKER_LIMITATION_DESC" />
-                <field name="list_all_media_files" type="radio" default="0" label="FLEXI_FIELD_INCLUDE_IMAGES_UPLOADED_FIELD" description="FLEXI_FIELD_INCLUDE_IMAGES_UPLOADED_FIELD_DESC" class="btn-group btn-group-yesno">
+                <field name="list_all_media_files" type="radio" default="1" label="FLEXI_FIELD_INCLUDE_IMAGES_UPLOADED_FIELD" description="FLEXI_FIELD_INCLUDE_IMAGES_UPLOADED_FIELD_DESC" class="btn-group btn-group-yesno">
                     <option value="0">FLEXI_FIELD_THIS_FIELD</option>
                     <option value="1">FLEXI_FIELD_ANY_FIELD_OR_FM</option>
                 </field>
-                <field name="limit_by_uploader" type="radio" default="0" label="FLEXI_FIELD_LIMIT_TO_USER_UPLOADED" description="FLEXI_FIELD_LIMIT_TO_USER_UPLOADED_DESC" class="btn-group btn-group-yesno">
+                <field name="limit_by_uploader" type="radio" default="1" label="FLEXI_FIELD_LIMIT_TO_USER_UPLOADED" description="FLEXI_FIELD_LIMIT_TO_USER_UPLOADED_DESC" class="btn-group btn-group-yesno">
                     <option value="1">FLEXI_FIELD_CURRENT_USER</option>
                     <option value="0">FLEXI_FIELD_ANY_USER</option>
                 </field>
-                <field name="unique_thumb_method" type="radio" default="0" label="FLEXI_FIELD_UNIQUE_THUMB_METHOD" description="FLEXI_FIELD_UNIQUE_THUMB_METHOD_DESC" class="btn-group btn-group-yesno">
+                <field name="unique_thumb_method" type="radio" default="1" label="FLEXI_FIELD_UNIQUE_THUMB_METHOD" description="FLEXI_FIELD_UNIQUE_THUMB_METHOD_DESC" class="btn-group btn-group-yesno">
                     <option value="0">FLEXI_FIELD_UNIQUE_THUMB_FIELD_ID</option>
                     <option value="1">FLEXI_FIELD_UNIQUE_THUMB_FOLDER</option>
                 </field>
