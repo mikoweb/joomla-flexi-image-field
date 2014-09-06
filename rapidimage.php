@@ -23,14 +23,13 @@ require_once JPATH_PLUGINS . "/flexicontent_fields/image/image.php";
  */
 class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
 {
-    static $field_types = array('rapidimage');
-
     /**
      * @param $subject
      * @param $params
      */
     public function __construct(&$subject, $params)
     {
+        plgFlexicontent_fieldsImage::$field_types[] = 'rapidimage';
         parent::__construct($subject, $params);
         JPlugin::loadLanguage('plg_flexicontent_fields_rapidimage', JPATH_ADMINISTRATOR);
     }
