@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" version="1.6" group="flexicontent_fields" method="upgrade">
+    <name>plg_flexicontent_fields_rapidimage</name>
+    <author>Rafał Mikołajun</author>
+    <creationDate>September 2014</creationDate>
+    <copyright>Copyright (C) 2014 Rafał Mikołajun</copyright>
+    <license>MIT</license>
+    <authorEmail>rafal@vision-web.pl</authorEmail>
+    <authorUrl>www.vision-web.pl</authorUrl>
+    <version>0.0.1</version>
+    <description>FLEXI_FIELD_RAPIDIMAGE</description>
+    <scriptfile>install.php</scriptfile>
+	<files>
+		<filename plugin="rapidimage">rapidimage.php</filename>
+        <filename>.htaccess</filename>
+		<filename>index.html</filename>
+        <filename>LICENSE</filename>
+	</files>
+    <languages folder="language">
+        <language tag="en-GB">en-GB/en-GB.plg_flexicontent_fields_rapidimage.ini</language>
+        <language tag="en-GB">en-GB/en-GB.plg_flexicontent_fields_rapidimage.sys.ini</language>
+        <language tag="pl-PL">pl-PL/pl-PL.plg_flexicontent_fields_rapidimage.ini</language>
+        <language tag="pl-PL">pl-PL/pl-PL.plg_flexicontent_fields_rapidimage.sys.ini</language>
+    </languages>
+</extension>
