@@ -64,7 +64,7 @@
 
                 <field name="default_image" type="media" default="" size="60" label="FLEXI_FIELD_DEFAULT_IMAGE" description="FLEXI_FIELD_DEFAULT_IMAGE_DESC" />
                 <field name="dir" type="text" default="images/stories/flexicontent" size="60" label="FLEXI_FIELD_IMAGE_FOLDER" description="FLEXI_FIELD_IMAGE_FOLDER_DESC" />
-                <field name="quality" type="text" default="90" size="4" label="FLEXI_FIELD_IMAGE_QUALITY" description="FLEXI_FIELD_IMAGE_QUALITY_DESC" />
+                <field name="quality" type="text" default="100" size="4" label="FLEXI_FIELD_IMAGE_QUALITY" description="FLEXI_FIELD_IMAGE_QUALITY_DESC" />
                 <field name="wm_opacity" type="text" default="100" size="4" label="FLEXI_FIELD_IMAGE_WM_TRANS" description="FLEXI_FIELD_IMAGE_WM_TRANS_DESC" />
                 <field name="wm_position" type="list" default="BR" label="FLEXI_FIELD_IMAGE_WM_POS" description="FLEXI_FIELD_IMAGE_WM_POS_DESC">
                     <option value="*">FLEXI_FIELD_REPEAT</option>
@@ -84,11 +84,11 @@
                     <option value="0">FLEXI_SCALE</option>
                     <option value="1">FLEXI_CROP</option>
                 </field>
-                <field name="use_watermark_l" type="radio" default="1" label="FLEXI_FIELD_IMAGE_USE_WM" description="FLEXI_FIELD_IMAGE_USE_WM_DESC" class="btn-group btn-group-yesno">
+                <field name="use_watermark_l" type="radio" default="0" label="FLEXI_FIELD_IMAGE_USE_WM" description="FLEXI_FIELD_IMAGE_USE_WM_DESC" class="btn-group btn-group-yesno">
                     <option value="0">FLEXI_NO</option>
                     <option value="1">FLEXI_YES</option>
                 </field>
-                <field name="wm_l" type="text" default="plugins/flexicontent_fields/image/watermarks/wm_l.png" size="60" label="FLEXI_FIELD_IMAGE_WM" description="FLEXI_FIELD_IMAGE_WM_DESC" />
+                <field name="wm_l" type="text" default="" size="60" label="FLEXI_FIELD_IMAGE_WM" description="FLEXI_FIELD_IMAGE_WM_DESC" />
                 <field name="copy_original_l" type="radio" default="1" label="FLEXI_COPY_ORIGINAL" description="FLEXI_COPY_ORIGINAL_DESC" class="btn-group btn-group-yesno">
                     <option value="0">FLEXI_NO</option>
                     <option value="1">FLEXI_YES</option>
@@ -102,11 +102,11 @@
                     <option value="0">FLEXI_SCALE</option>
                     <option value="1">FLEXI_CROP</option>
                 </field>
-                <field name="use_watermark_m" type="radio" default="1" label="FLEXI_FIELD_IMAGE_USE_WM" description="FLEXI_FIELD_IMAGE_USE_WM_DESC" class="btn-group btn-group-yesno">
+                <field name="use_watermark_m" type="radio" default="0" label="FLEXI_FIELD_IMAGE_USE_WM" description="FLEXI_FIELD_IMAGE_USE_WM_DESC" class="btn-group btn-group-yesno">
                     <option value="0">FLEXI_NO</option>
                     <option value="1">FLEXI_YES</option>
                 </field>
-                <field name="wm_m" type="text" default="plugins/flexicontent_fields/image/watermarks/wm_m.png" size="60" label="FLEXI_FIELD_IMAGE_WM" description="FLEXI_FIELD_IMAGE_WM_DESC" />
+                <field name="wm_m" type="text" default="" size="60" label="FLEXI_FIELD_IMAGE_WM" description="FLEXI_FIELD_IMAGE_WM_DESC" />
                 <field name="copy_original_m" type="radio" default="1" label="FLEXI_COPY_ORIGINAL" description="FLEXI_COPY_ORIGINAL_DESC" class="btn-group btn-group-yesno">
                     <option value="0">FLEXI_NO</option>
                     <option value="1">FLEXI_YES</option>
@@ -120,11 +120,11 @@
                     <option value="0">FLEXI_SCALE</option>
                     <option value="1">FLEXI_CROP</option>
                 </field>
-                <field name="use_watermark_s" type="radio" default="1" label="FLEXI_FIELD_IMAGE_USE_WM" description="FLEXI_FIELD_IMAGE_USE_WM_DESC" class="btn-group btn-group-yesno">
+                <field name="use_watermark_s" type="radio" default="0" label="FLEXI_FIELD_IMAGE_USE_WM" description="FLEXI_FIELD_IMAGE_USE_WM_DESC" class="btn-group btn-group-yesno">
                     <option value="0">FLEXI_NO</option>
                     <option value="1">FLEXI_YES</option>
                 </field>
-                <field name="wm_s" type="text" default="plugins/flexicontent_fields/image/watermarks/wm_s.png" size="60" label="FLEXI_FIELD_IMAGE_WM" description="FLEXI_FIELD_IMAGE_WM_DESC" />
+                <field name="wm_s" type="text" default="" size="60" label="FLEXI_FIELD_IMAGE_WM" description="FLEXI_FIELD_IMAGE_WM_DESC" />
                 <field name="copy_original_s" type="radio" default="1" label="FLEXI_COPY_ORIGINAL" description="FLEXI_COPY_ORIGINAL_DESC" class="btn-group btn-group-yesno">
                     <option value="0">FLEXI_NO</option>
                     <option value="1">FLEXI_YES</option>
@@ -138,11 +138,11 @@
                     <option value="0">FLEXI_SCALE</option>
                     <option value="1">FLEXI_CROP</option>
                 </field>
-                <field name="use_watermark_b" type="radio" default="1" label="FLEXI_FIELD_IMAGE_USE_WM" description="FLEXI_FIELD_IMAGE_USE_WM_DESC" class="btn-group btn-group-yesno">
+                <field name="use_watermark_b" type="radio" default="0" label="FLEXI_FIELD_IMAGE_USE_WM" description="FLEXI_FIELD_IMAGE_USE_WM_DESC" class="btn-group btn-group-yesno">
                     <option value="0">FLEXI_NO</option>
                     <option value="1">FLEXI_YES</option>
                 </field>
-                <field name="wm_b" type="text" default="plugins/flexicontent_fields/image/watermarks/wm_s.png" size="60" label="FLEXI_FIELD_IMAGE_WM" description="FLEXI_FIELD_IMAGE_WM_DESC" />
+                <field name="wm_b" type="text" default="" size="60" label="FLEXI_FIELD_IMAGE_WM" description="FLEXI_FIELD_IMAGE_WM_DESC" />
                 <field name="copy_original_b" type="radio" default="1" label="FLEXI_COPY_ORIGINAL" description="FLEXI_COPY_ORIGINAL_DESC" class="btn-group btn-group-yesno">
                     <option value="0">FLEXI_NO</option>
                     <option value="1">FLEXI_YES</option>
