@@ -14,6 +14,8 @@ defined('_JEXEC') or die;
 defined('RAPID_FRAMEWORK') or die('Joomla! Rapid Framework is not installed.');
 jimport ('joomla.plugin.helper');
 
+require_once JPATH_PLUGINS . "/flexicontent_fields/image/image.php";
+
 /**
  * Pole typu plik graficzny
  * @author  Rafał Mikołajun <rafal@vision-web.pl>
