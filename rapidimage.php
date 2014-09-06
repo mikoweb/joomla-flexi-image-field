@@ -33,4 +33,34 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
         parent::__construct($subject, $params);
         JPlugin::loadLanguage('plg_flexicontent_fields_rapidimage', JPATH_ADMINISTRATOR);
     }
+
+
+    /**
+     * Method to create field's HTML display for item form
+     * @param $field
+     * @param $item
+     */
+    public function onDisplayField(&$field, &$item)
+    {
+        parent::onDisplayField($field, $item);
+
+        /*
+         * Naprawiono opcje usuwania ilustracji
+         */
+        \JFactory::getDocument()->addScriptDeclaration('jQuery(document).ready(function($) {
+            $(".container_fcfield").on("change", "input.imgremove[type=\"checkbox\"]", function() {
+                var $this = $(this),
+                    container = $this.closest(".container_fcfield"),
+                    existingname = container.find("input.existingname").eq(0);
+
+                if ($this.is(":checked")) {
+                    existingname.data("old_value", existingname.val());
+                    existingname.val("");
+                } else {
+                    existingname.val(existingname.data("old_value"));
+                    existingname.data("old_value", "");
+                }
+            });
+        });');
+    }
 }
