@@ -17,6 +17,7 @@ jimport ('joomla.plugin.helper');
 require_once JPATH_PLUGINS . "/flexicontent_fields/image/image.php";
 
 use Joomla\Rapid\Document\DocumentOptimizer;
+use Joomla\Rapid\FlexiContent\Images\FlexiImages;
 use Joomla\RapidApp\App;
 
 /**
@@ -163,6 +164,10 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
             throw new \RuntimeException('Not exists image marked imageIndex: ' . $imageIndex);
         }
 
+        $flexiImages = FlexiImages::create(array(
+                'field' => $field
+            ));
+
         $data = array(
             'alt' => $values[$imageIndex]['alt'],
             'title' => $values[$imageIndex]['title'],
@@ -181,7 +186,7 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
                 'large' => $field->thumbs_path['large'][$imageIndex],
                 'original' => $field->thumbs_path['original'][$imageIndex]
             ),
-            'picture' => array()
+            'picture' => $flexiImages->generate()
         );
 
         return $data;
