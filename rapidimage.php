@@ -164,10 +164,6 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
             throw new \RuntimeException('Not exists image marked imageIndex: ' . $imageIndex);
         }
 
-        $flexiImages = FlexiImages::create(array(
-                'field' => $field
-            ));
-
         $data = array(
             'alt' => $values[$imageIndex]['alt'],
             'title' => $values[$imageIndex]['title'],
@@ -186,8 +182,15 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
                 'large' => $field->thumbs_path['large'][$imageIndex],
                 'original' => $field->thumbs_path['original'][$imageIndex]
             ),
-            'picture' => $flexiImages->generate()
+            'picture' => null
         );
+
+        $flexiImages = FlexiImages::create(array(
+                'field' => $field,
+                'image_data' => &$data
+            ));
+
+        $data['picture'] = &$flexiImages->generate();
 
         return $data;
     }
