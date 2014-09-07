@@ -102,7 +102,12 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
         $field->image_data = array();
         $field->image_data_length = count($field->value);
         for ($i = 0; $i < $field->image_data_length;  $i++) {
-            $field->image_data[] = $this->getImageData($field, $item, $i);
+            $data = $this->getImageData($field, $item, $i);
+            $field->image_data[] = &$data;
+            $flexiImages = FlexiImages::create(array(
+                    'image_field' => $field
+                ));
+            $flexiImages->generate();
         }
     }
 
@@ -184,12 +189,6 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
             ),
             'picture' => array()
         );
-
-        $flexiImages = FlexiImages::create(array(
-                'field' => $field,
-                'image_data' => &$data
-            ));
-        $flexiImages->generate();
 
         return $data;
     }
