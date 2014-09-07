@@ -84,7 +84,7 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
     /**
      * Method to create field's HTML display for frontend views
      * @param stdClass $field
-     * @param stdClass $item
+     * @param object $item
      * @param array|null $values
      * @param string $prop
      * @return array|void
@@ -133,11 +133,40 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
         $displayItem = clone $item;
         $this->onDisplayFieldValue($displayField, $displayItem);
 
-        // generowanie danych ilustracji
+        // zapisywanie ilustracji
         $imageData = array();
         for ($i = 0, $len = count($displayField->value); $i < $len;  $i++) {
-            $imageData[] = $this->getImageData($displayField, $displayItem, $i);
+            $data = $this->getImageData($displayField, $displayItem, $i);
+            $imageData[] = &$data;
+            $this->flexiImages->generate($field, $data, $item, array("forcesave" => true));
         }
+    }
+
+    /**
+     * Method called just before the item is deleted
+     * to remove custom item data related to the field
+     * @param stdClass $field
+     * @param flexicontent_items $item
+     * @return bool|void
+     */
+    function onBeforeDeleteField(&$field, &$item)
+    {
+        parent::onBeforeDeleteField($field, $item);
+
+        /*
+         * Potrzebne są dane ilustracji: ścieżki, url etc.
+         */
+        $displayField = clone $field;
+        $displayItem = clone $item;
+        $this->onDisplayFieldValue($displayField, $displayItem);
+
+        // usuwanie ilustracji
+        $imageData = array();
+        for ($i = 0, $len = count($displayField->value); $i < $len;  $i++) {
+            $data = $this->getImageData($displayField, $displayItem, $i);
+            $imageData[] = &$data;
+            $this->flexiImages->generate($field, $data, $item, array("cleanup_mode" => true));
+        }        
     }
 
     /**
@@ -194,17 +223,5 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
         );
 
         return $data;
-    }
-
-    /**
-     * Method called just before the item is deleted
-     * to remove custom item data related to the field
-     * @param stdClass $field
-     * @param flexicontent_items $item
-     * @return bool|void
-     */
-    function onBeforeDeleteField(&$field, &$item)
-    {
-        parent::onBeforeDeleteField($field, $item);
     }
 }
