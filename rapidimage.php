@@ -105,7 +105,8 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
             $data = $this->getImageData($field, $item, $i);
             $field->image_data[] = &$data;
             $flexiImages = FlexiImages::create(array(
-                    'image_field' => $field
+                    'image_field' => $field,
+                    'image_data' => &$data
                 ));
             $flexiImages->generate();
         }
