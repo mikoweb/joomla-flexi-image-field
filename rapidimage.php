@@ -108,9 +108,8 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
         $field->image_data = array();
         $field->image_data_length = count($field->value);
         for ($i = 0; $i < $field->image_data_length;  $i++) {
-            $data = $this->getImageData($field, $item, $i);
-            $field->image_data[] = &$data;
-            $this->flexiImages->generate($field, $data, $item);
+            $field->image_data[$i] = $this->getImageData($field, $item, $i);
+            $this->flexiImages->generate($field, $field->image_data[$i], $item);
         }
     }
 
@@ -136,9 +135,8 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
         // zapisywanie ilustracji
         $imageData = array();
         for ($i = 0, $len = count($displayField->value); $i < $len;  $i++) {
-            $data = $this->getImageData($displayField, $displayItem, $i);
-            $imageData[] = &$data;
-            $this->flexiImages->generate($field, $data, $item, array("forcesave" => true));
+            $imageData[$i] = $this->getImageData($displayField, $displayItem, $i);
+            $this->flexiImages->generate($field, $imageData[$i], $item, array("forcesave" => true));
         }
     }
 
@@ -163,10 +161,9 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
         // usuwanie ilustracji
         $imageData = array();
         for ($i = 0, $len = count($displayField->value); $i < $len;  $i++) {
-            $data = $this->getImageData($displayField, $displayItem, $i);
-            $imageData[] = &$data;
-            $this->flexiImages->generate($field, $data, $item, array("cleanup_mode" => true));
-        }        
+            $imageData[$i] = $this->getImageData($displayField, $displayItem, $i);
+            $this->flexiImages->generate($field, $imageData[$i], $item, array("cleanup_mode" => true));
+        }
     }
 
     /**
