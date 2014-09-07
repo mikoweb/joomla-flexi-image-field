@@ -189,8 +189,7 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
                 'field' => $field,
                 'image_data' => &$data
             ));
-
-        $data['picture'] = &$flexiImages->generate();
+        $flexiImages->generate();
 
         return $data;
     }
