@@ -110,7 +110,7 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
         for ($i = 0; $i < $field->image_data_length;  $i++) {
             $data = $this->getImageData($field, $item, $i);
             $field->image_data[] = &$data;
-            $this->flexiImages->generate();
+            $this->flexiImages->generate($field, $data);
         }
     }
 
