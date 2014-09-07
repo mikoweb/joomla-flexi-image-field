@@ -182,7 +182,7 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
                 'large' => $field->thumbs_path['large'][$imageIndex],
                 'original' => $field->thumbs_path['original'][$imageIndex]
             ),
-            'picture' => null
+            'picture' => array()
         );
 
         $flexiImages = FlexiImages::create(array(
