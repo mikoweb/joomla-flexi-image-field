@@ -18,8 +18,8 @@
 (function () {
     "use strict";
 
-    window.onload = function () {
-        var limit = 100,
+    window.addEventListener('load', function() {
+        var limit = 10,
             start = 0,
             urlTest = /^https?:\/\/.*\/administrator\/index.php\?option=com_flexicontent&view=items&limit=\d+.*$/,
             startTest = /^https?:\/\/.*\/administrator\/index.php\?option=com_flexicontent&view=items&limit=\d+&limitstart=(\d+).*$/,
@@ -75,7 +75,11 @@
             }
 
             for (i = 0; i < editLinks.length; i++) {
-                generateIframe(editLinks[i].getAttribute("href"));
+                (function (linkNo) {
+                    setTimeout(function () {
+                        generateIframe(editLinks[linkNo].getAttribute("href"));
+                    }, 50 * linkNo);
+                }(i));
             }
 
             container.innerHTML = '<div class="hero-unit">'
@@ -93,5 +97,5 @@
             container.style.top = "40px";
             document.body.appendChild(container);
         }());
-    };
+    }, false);
 }());
