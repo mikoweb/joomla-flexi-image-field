@@ -214,13 +214,23 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
          * w zależności od $originalOld i $originalNew
          */
 
+        $forceUpdate = false;
+        $params = (isset($field->parameters) && $field->parameters instanceof JRegistry)
+            ? $field->parameters : null;
+
+        if (!is_null($params)) {
+            $forceUpdate = $params->get('image_loader_autoregenerate', '0') == '1';
+        }
+
         // usuwanie starych
         foreach ($beforeData as $i => &$data) {
             if (isset($originalOld[$i]) && (
-                    !isset($originalNew[$i])
-                    || $originalNew[$i]['filename'] != $originalOld[$i]['filename']
-                    || $originalNew[$i]['filesize'] != $originalOld[$i]['filesize']
-                    || $originalNew[$i]['filemtime'] != $originalOld[$i]['filemtime']
+                    $forceUpdate || (
+                        !isset($originalNew[$i])
+                        || $originalNew[$i]['filename'] != $originalOld[$i]['filename']
+                        || $originalNew[$i]['filesize'] != $originalOld[$i]['filesize']
+                        || $originalNew[$i]['filemtime'] != $originalOld[$i]['filemtime']
+                    )
                 )
             ) {
                 $this->flexiImages->generate($beforeField, $data, $beforeItem, array("cleanup_mode" => true));
@@ -234,10 +244,12 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
         // zapisywanie nowych
         foreach ($afterData as $i => &$data) {
             if (isset($originalNew[$i]) && (
-                    !isset($originalOld[$i])
-                    || $originalNew[$i]['filename'] != $originalOld[$i]['filename']
-                    || $originalNew[$i]['filesize'] != $originalOld[$i]['filesize']
-                    || $originalNew[$i]['filemtime'] != $originalOld[$i]['filemtime']
+                    $forceUpdate || (
+                        !isset($originalOld[$i])
+                        || $originalNew[$i]['filename'] != $originalOld[$i]['filename']
+                        || $originalNew[$i]['filesize'] != $originalOld[$i]['filesize']
+                        || $originalNew[$i]['filemtime'] != $originalOld[$i]['filemtime']
+                    )
                 )
             ) {
                 $this->flexiImages->generate($afterField, $data, $afterItem, array("forcesave" => true));
