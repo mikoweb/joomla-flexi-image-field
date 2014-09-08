@@ -123,20 +123,131 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
      */
     function onAfterSaveField(&$field, &$post, &$file, &$item)
     {
+        /*
+         * Dane przed aktualizacją ilustracji
+         */
+        $beforeField = clone $field;
+        $beforeItem = clone $item;
+        $this->onDisplayFieldValue($beforeField, $beforeItem);
+
+        $beforeData = array();
+        for ($i = 0, $len = count($beforeField->value); $i < $len;  $i++) {
+            $beforeData[$i] = $this->getImageData($beforeField, $beforeItem, $i);
+        }
+
+        // zrób co trzeba
         parent::onAfterSaveField($field, $post, $file, $item);
 
         /*
-         * Potrzebne są dane ilustracji: ścieżki, url etc.
+         * Dane po aktualizacji ilustracji
          */
-        $displayField = clone $field;
-        $displayItem = clone $item;
-        $this->onDisplayFieldValue($displayField, $displayItem);
+        $afterField = clone $field;
+        $afterItem = clone $item;
 
-        // zapisywanie ilustracji
-        $imageData = array();
-        for ($i = 0, $len = count($displayField->value); $i < $len;  $i++) {
-            $imageData[$i] = $this->getImageData($displayField, $displayItem, $i);
-            $this->flexiImages->generate($field, $imageData[$i], $item, array("forcesave" => true));
+        // podmieniamy wartości tablicy 'value'
+        $afterField->value = array();
+        foreach($post as $i => $value) {;
+            $afterField->value[$i] = $post[$i];
+        }
+        $this->onDisplayFieldValue($afterField, $afterItem);
+
+        $afterData = array();
+        for ($i = 0, $len = count($afterField->value); $i < $len;  $i++) {
+            $afterData[$i] = $this->getImageData($afterField, $afterItem, $i);
+        }
+
+        // log
+        //file_put_contents(JPATH_ROOT . '/field_log.txt', serialize($beforeData) . "\n\n\n" . serialize($afterData));
+
+        $defaultData = array(
+            'filename' => null,
+            'filesize' => null,
+            'filemtime' => null
+        );
+
+        /*
+         * Tablice $originalOld i $originalNew będą porównywane
+         * w celu ustalenia czy nastąpiły jakieś zmiany
+         */
+        $originalOld = array();
+        $originalNew = array();
+
+        /**
+         * Funkcja generująca dane porównawcze
+         * @param array $original
+         * @param array $imageData
+         * @param bool $sizeTimeFromCache
+         */
+        $setOriginal = function (array &$original, array &$imageData, $sizeTimeFromCache = false) use($defaultData) {
+            foreach ($imageData as $i => &$data) {
+                $original[$i] = $defaultData;
+                if (isset($data['thumbs_path'])
+                    && is_array($data['thumbs_path'])
+                    && isset($data['thumbs_path']['original'])
+                    && is_string($data['thumbs_path']['original'])
+                ) {
+                    $original[$i]['filename'] = $data['thumbs_path']['original'];
+                    if ($sizeTimeFromCache) {
+                        $cacheData = @unserialize(file_get_contents($original[$i]['filename'] . '.cache'));
+                        if (is_array($cacheData)) {
+                            if (isset($cacheData['filesize'])) {
+                                $original[$i]['filesize'] = intval($cacheData['filesize']);
+                            }
+                            if (isset($cacheData['filemtime'])) {
+                                $original[$i]['filemtime'] = intval($cacheData['filemtime']);
+                            }
+                        }
+                    } else {
+                        $original[$i]['filesize'] = @filesize($data['thumbs_path']['original']);
+                        $original[$i]['filemtime'] = @filemtime($data['thumbs_path']['original']);
+                    }
+                }
+            }
+        };
+
+        // wypełnij danymi
+        $setOriginal($originalOld, $beforeData, true);
+        $setOriginal($originalNew, $afterData);
+
+        /*
+         * Zapisywanie plików graficznych bądź też usuwanie
+         * w zależności od $originalOld i $originalNew
+         */
+
+        // usuwanie starych
+        foreach ($beforeData as $i => &$data) {
+            if (isset($originalOld[$i]) && (
+                    !isset($originalNew[$i])
+                    || $originalNew[$i]['filename'] != $originalOld[$i]['filename']
+                    || $originalNew[$i]['filesize'] != $originalOld[$i]['filesize']
+                    || $originalNew[$i]['filemtime'] != $originalOld[$i]['filemtime']
+                )
+            ) {
+                $this->flexiImages->generate($beforeField, $data, $beforeItem, array("cleanup_mode" => true));
+                // usuwanie pliku cache
+                @unlink($originalOld[$i]['filename'] . '.cache');
+                // log
+                //file_put_contents(JPATH_ROOT . '/field_log.txt', file_get_contents(JPATH_ROOT . '/field_log.txt') . '[' . date('l jS F Y h:i:s A') . '] delete from: ' . $originalOld[$i]['filename'] . "\n");
+            }
+        }
+
+        // zapisywanie nowych
+        foreach ($afterData as $i => &$data) {
+            if (isset($originalNew[$i]) && (
+                    !isset($originalOld[$i])
+                    || $originalNew[$i]['filename'] != $originalOld[$i]['filename']
+                    || $originalNew[$i]['filesize'] != $originalOld[$i]['filesize']
+                    || $originalNew[$i]['filemtime'] != $originalOld[$i]['filemtime']
+                )
+            ) {
+                $this->flexiImages->generate($afterField, $data, $afterItem, array("forcesave" => true));
+                // tworzenie pliku cache dla oryginalnej ilustracji
+                $copy = $originalNew[$i];
+                unset($copy['filename']);
+                file_put_contents($originalNew[$i]['filename'] . '.cache', serialize($copy));
+                // log
+                //file_put_contents(JPATH_ROOT . '/field_log.txt', file_get_contents(JPATH_ROOT . '/field_log.txt') . '[' . date('l jS F Y h:i:s A') . '] saved from: ' . $originalNew[$i]['filename'] . "\n");
+            }
         }
     }
 
@@ -150,19 +261,15 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
     function onBeforeDeleteField(&$field, &$item)
     {
         parent::onBeforeDeleteField($field, $item);
+        $outputDir = FlexiImages::getImagesOutputDir($item, $field->name);
+        if (is_string($outputDir) && !empty($outputDir)) {
+            // usuwanie wszystkich plików graficznych z katalogu
+            foreach(glob(JPATH_ROOT . $outputDir . '/{*.jpg,*.jpeg,*.gif,*.png,*.bmp}', GLOB_BRACE) as $file) {
+                unlink($file);
+            }
 
-        /*
-         * Potrzebne są dane ilustracji: ścieżki, url etc.
-         */
-        $displayField = clone $field;
-        $displayItem = clone $item;
-        $this->onDisplayFieldValue($displayField, $displayItem);
-
-        // usuwanie ilustracji
-        $imageData = array();
-        for ($i = 0, $len = count($displayField->value); $i < $len;  $i++) {
-            $imageData[$i] = $this->getImageData($displayField, $displayItem, $i);
-            $this->flexiImages->generate($field, $imageData[$i], $item, array("cleanup_mode" => true));
+            // usuwanie katalogu
+            rmdir(JPATH_ROOT . $outputDir);
         }
     }
 
