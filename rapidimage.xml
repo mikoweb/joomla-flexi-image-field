@@ -7,7 +7,7 @@
     <license>MIT</license>
     <authorEmail>rafal@vision-web.pl</authorEmail>
     <authorUrl>www.vision-web.pl</authorUrl>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <description>FLEXI_FIELD_RAPIDIMAGE</description>
     <scriptfile>install.php</scriptfile>
     <files>
@@ -63,7 +63,7 @@
 
 
                 <field name="" type="separator" default="FLEXI_RAPIDIMAGE_IMAGELOADER_TITLE" description="" level="level2" />
-                <field name="image_loader_enable" type="radio" default="1" label="FLEXI_ENABLE_PROPERTY" description="FLEXI_ENABLE_PROPERTY_DESC" class="btn-group btn-group-yesno">
+                <field name="image_loader_enable" type="radio" default="1" label="FLEXI_ENABLE_PROPERTY" description="" class="btn-group btn-group-yesno">
                     <option value="0">FLEXI_NO</option>
                     <option value="1">FLEXI_YES</option>
                 </field>
@@ -72,13 +72,10 @@
                 <field name="image_loader_names" type="textarea" rows="3" cols="60" default="thumb, image" label="FLEXI_RAPIDIMAGE_IMAGELOADER_NAMES" description="FLEXI_RAPIDIMAGE_IMAGELOADER_NAMES_DESC" filter="STRING" />
 
                 <field name="" type="separator" default="FLEXI_RAPIDIMAGE_IMAGELOADER_AUTOREGENERATE" level="level3" />
-                <field name="image_loader_autoregenerate" type="radio" default="0" label="FLEXI_ENABLE_PROPERTY" description="FLEXI_ENABLE_PROPERTY_DESC" class="btn-group btn-group-yesno">
+                <field name="image_loader_autoregenerate" type="radio" default="0" label="FLEXI_ENABLE_PROPERTY" description="FLEXI_RAPIDIMAGE_IMAGELOADER_AUTOREGENERATE_DESC" class="btn-group btn-group-yesno">
                     <option value="0">FLEXI_NO</option>
                     <option value="1">FLEXI_YES</option>
                 </field>
-                <field name="image_loader_autoregenerate_bydate" type="calendar" default="" label="FLEXI_RAPIDIMAGE_IMAGELOADER_AUTOREGENERATE_BYDATE" description="FLEXI_RAPIDIMAGE_IMAGELOADER_AUTOREGENERATE_BYDATE_DESC" format="%Y-%m-%d" />
-                <field name="image_loader_autoregenerate_bynames" type="textarea" rows="3" cols="60" default="" label="FLEXI_RAPIDIMAGE_IMAGELOADER_AUTOREGENERATE_BYNAMES" description="FLEXI_RAPIDIMAGE_IMAGELOADER_AUTOREGENERATE_BYNAMES_DESC" filter="STRING" />
-
 
 
                 <field name="" type="separator" default="FLEXI_DISPLAY_OPTIONS" level="level2" />
