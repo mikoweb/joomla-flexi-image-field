@@ -298,45 +298,40 @@ class plgFlexicontent_fieldsRapidimage extends plgFlexicontent_fieldsImage
      */
     private function &getImageData(stdClass $field, $item, $imageIndex = 0, array $options = array())
     {
-        if (!is_array($field->value) || !is_array($field->thumbs_src)
-            || !is_array($field->thumbs_path)
+        $data = array();
+
+        if (is_integer($imageIndex) && is_array($field->value)
+            && is_array($field->thumbs_src)
+            && is_array($field->thumbs_path)
         ) {
-            throw new \UnexpectedValueException("Invalid field object");
-        }
+            $values = array();
+            foreach ($field->value as $val) {
+                $values[] = unserialize($val);
+            }
 
-        if (!is_integer($imageIndex)) {
-            throw new \InvalidArgumentException("imageIndex is not integer");
+            if (isset($values[$imageIndex]) && is_array($values[$imageIndex])) {
+                $data = array(
+                    'alt' => $values[$imageIndex]['alt'],
+                    'title' => $values[$imageIndex]['title'],
+                    'description' => $values[$imageIndex]['desc'],
+                    'thumbs_src' => array(
+                        'backend' => $field->thumbs_src['backend'][$imageIndex],
+                        'small' => $field->thumbs_src['small'][$imageIndex],
+                        'medium' => $field->thumbs_src['medium'][$imageIndex],
+                        'large' => $field->thumbs_src['large'][$imageIndex],
+                        'original' => $field->thumbs_src['original'][$imageIndex]
+                    ),
+                    'thumbs_path' => array(
+                        'backend' => $field->thumbs_path['backend'][$imageIndex],
+                        'small' => $field->thumbs_path['small'][$imageIndex],
+                        'medium' => $field->thumbs_path['medium'][$imageIndex],
+                        'large' => $field->thumbs_path['large'][$imageIndex],
+                        'original' => $field->thumbs_path['original'][$imageIndex]
+                    ),
+                    'picture' => array()
+                );
+            }
         }
-
-        $values = array();
-        foreach ($field->value as $val) {
-            $values[] = unserialize($val);
-        }
-
-        if (!isset($values[$imageIndex]) || !is_array($values[$imageIndex])) {
-            throw new \RuntimeException('Not exists image marked imageIndex: ' . $imageIndex);
-        }
-
-        $data = array(
-            'alt' => $values[$imageIndex]['alt'],
-            'title' => $values[$imageIndex]['title'],
-            'description' => $values[$imageIndex]['desc'],
-            'thumbs_src' => array(
-                'backend' => $field->thumbs_src['backend'][$imageIndex],
-                'small' => $field->thumbs_src['small'][$imageIndex],
-                'medium' => $field->thumbs_src['medium'][$imageIndex],
-                'large' => $field->thumbs_src['large'][$imageIndex],
-                'original' => $field->thumbs_src['original'][$imageIndex]
-            ),
-            'thumbs_path' => array(
-                'backend' => $field->thumbs_path['backend'][$imageIndex],
-                'small' => $field->thumbs_path['small'][$imageIndex],
-                'medium' => $field->thumbs_path['medium'][$imageIndex],
-                'large' => $field->thumbs_path['large'][$imageIndex],
-                'original' => $field->thumbs_path['original'][$imageIndex]
-            ),
-            'picture' => array()
-        );
 
         return $data;
     }
